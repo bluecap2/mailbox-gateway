@@ -1,0 +1,74 @@
+server:
+  port: 8088
+
+---
+
+spring:
+  profiles: default
+  cloud:
+    gateway:
+      routes:
+        - id: mobile
+          uri: http://localhost:8081
+          predicates:
+            - Path=/mobiles/** 
+        - id: mailbox
+          uri: http://localhost:8082
+          predicates:
+            - Path=/mailboxes/** /readmails/**
+        - id: 알람
+          uri: http://localhost:8083
+          predicates:
+            - Path=/알람이력/** 
+        - id: alarm
+          uri: http://localhost:8084
+          predicates:
+            - Path=/alarmLists/** 
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+
+---
+
+spring:
+  profiles: docker
+  cloud:
+    gateway:
+      routes:
+        - id: mobile
+          uri: http://mobile:8080
+          predicates:
+            - Path=/mobiles/** 
+        - id: mailbox
+          uri: http://mailbox:8080
+          predicates:
+            - Path=/mailboxes/** /readmails/**
+        - id: 알람
+          uri: http://알람:8080
+          predicates:
+            - Path=/알람이력/** 
+        - id: alarm
+          uri: http://alarm:8080
+          predicates:
+            - Path=/alarmLists/** 
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+server:
+  port: 8080
