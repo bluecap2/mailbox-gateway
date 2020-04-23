@@ -15,7 +15,7 @@ spring:
         - id: mailbox
           uri: http://localhost:8082
           predicates:
-            - Path=/mailboxes/**
+            - Path=/mailboxes/**,/readmails/**
         - id: alarm
           uri: http://localhost:8084
           predicates:
@@ -46,7 +46,7 @@ spring:
         - id: mailbox
           uri: http://mailbox:8080
           predicates:
-            - Path=/mailboxes/**
+            - Path=/mailboxes/**,/readmails/**
         - id: alarm
           uri: http://alarm:8080
           predicates:
